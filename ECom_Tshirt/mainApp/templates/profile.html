@@ -1,0 +1,53 @@
+{% extends 'default.html' %}
+{% block maincontent %}
+{% load static %}
+
+<section>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <i class="fa-solid fa-circle-user fa-4x"></i>
+              {% comment %} <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                class="rounded-circle img-fluid" style="width: 150px;"> {% endcomment %}
+                {% for u in userdetail %}
+              <h5 class="my-3">{{u.first_name}}&nbsp{{u.last_name}}</h5>
+              {% endfor %}
+              {% for cus in custoer_detail %}
+              <div class="mt-5">
+                <h5 class="text-left">Address line: {{forloop.counter}}</h5>
+                <p class="text-muted mb-4 text-left">{{cus.locality}},{{cus.city}},{{cus.state}},{{cus.zipcode}}</p>
+              </div>
+              {% endfor %}
+              <div class="d-flex justify-content-center mb-2">
+                {% comment %} <button type="button" class="btn btn-primary">Add New Address</button> {% endcomment %}
+              </div>
+              <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-primary">LOGOUT</button></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="">
+                <form action="" method="post">
+                    {% csrf_token %}
+                      <!-- 2 column grid layout with text inputs for the first and last names -->
+                      <div class="row mb-2 container">
+                        <div class="col">
+                          <div class="form-outline">
+                            {{form}}
+                            <button type="submit" class="btn btn-primary btn-block mt-4">Save</button>
+                          </div>
+                        </div>
+                      </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock maincontent %}

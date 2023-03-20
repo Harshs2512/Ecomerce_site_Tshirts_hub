@@ -1,0 +1,12 @@
+{% extends 'default.html' %}
+{% block maincontent %} 
+{% load static %}
+
+    <div class="m-5 p-2" style="">
+        <img src="{% static 'img/cart.png'%}" alt="" style="margin-left: 21.5rem; width: 30rem;">
+        <h1 style="margin-left: 25.5rem; width: 30rem;">Your Cart is Empty</h1>
+        <p style="margin-left: 25rem; margin-top: 2rem; width: 30rem;">Looks like you have not added anything in your cart.</p>
+        <a href="/home" ><button class="btn btn-primary" style="margin-left: 32rem; margin-top: 1rem;">Continue Shop</button></a>
+    </div>
+
+{% endblock maincontent %}

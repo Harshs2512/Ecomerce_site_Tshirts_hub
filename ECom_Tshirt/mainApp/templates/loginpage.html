@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>Title</title>
+</head>
+
+<body onload="generate()">
+    <section class="h-screen">
+        <div class="container px-60 py-8 h-[40rem] bg-gray-900">
+            <div class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
+                <div class="md:w-80 lg:w-6/12 mb-0">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                        class="w-96" alt="Phone image" />
+                </div>
+                <div class="md:w-8/12 lg:w-5/12 lg:ml-20">
+                    <form action="checkLogin" class="ml-[-5rem]"  onsubmit="return(printmsg());" method="post">
+                        {% csrf_token %}
+                        <!-- Email input -->
+                        <div class="mb-6 mt-8">
+                            <input type="text"
+                                class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                placeholder="Email address" name="uname"/>
+                        </div>
+
+                        <!-- Password input -->
+                        <div class="mb-6">
+                            <input type="password"
+                                class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                placeholder="Password" name="password" />
+                                <label class="error ml-2 text-red-400">{{error}}</label>
+                        </div>
+                        {% comment %} captch {% endcomment %}
+                        <div class="Captcha">
+                           <div class="captchaview flex">
+                              <div class="inputcap inline">
+                                  <input type="text" id="sub" placeholder="Enter Captcha" class="inputcap form-control block w-40 pl-1 py-0.2 mb-1 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
+                              </div>
+                              <div class="reloud inline" onclick="generate()">
+                                  <i class="fas fa-sync text-white mx-16"></i>
+                              </div>
+                              <div id="image" class="inline capimg font-bold text-2xl bg-white ml-4 rounded px-2" selectable="False"></div>
+                           </div>
+                           <p id="key" class="mt-2 text-base font-medium text-red-700"></p>
+                        </div>
+
+                        <div class="flex justify-between items-center mb-6">
+                            <div class="form-group form-check">
+                                <a href="registretion" class="text-white">New User?</a>
+                            </div>
+                            <a href="#!"
+                                class="text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out">Forgot
+                                password?</a>
+                        </div>
+
+                        <!-- Submit button -->
+                        <button type="submit"
+                            class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+                            data-mdb-ripple="true" data-mdb-ripple-color="light">
+                           Log in
+                        </button>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        var captcha;
+    
+        function generate() {
+    
+    
+            // Clear old input
+    
+            document.getElementById("sub").value = "";
+    
+    
+            // Access the element to store
+    
+            // the generated captcha
+    
+            captcha = document.getElementById("image");
+    
+            var uniquechar = "";
+    
+    
+            const randomchar =
+    
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    
+    
+            // Generate captcha for length of
+    
+            // 5 with random character
+    
+            for (let i = 1; i < 4; i++) {
+    
+                uniquechar += randomchar.charAt(
+    
+                    Math.random() * randomchar.length)
+    
+            }
+    
+    
+            // Store generated input
+    
+            captcha.innerHTML = uniquechar;
+        }
+    
+    
+        function printmsg() {
+    
+            const usr_input = document.getElementById("sub").value;
+    
+            if (usr_input == captcha.innerHTML) {
+                return true;
+            }
+    
+            else {
+                var s = document.getElementById("key").innerHTML = "Not Matched";
+                generate();
+                return false;
+            }
+        }
+        function finduser(){
+            var user = document.getElementById('user').value;
+            var admine = document.getElementById('admine').value;
+            console.log(user)
+            console.log(admine)
+        }
+    
+    </script>
+</body>
+</html>
